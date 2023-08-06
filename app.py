@@ -1,4 +1,8 @@
 import streamlit as st
+import requests
+import json
+from functions import generar_desde_mercado, generar_desde_problema, generar_desde_azar, generar_prop_valor_usuario, generar_propvalor, generar_modelo_negocio, generar_pitchdeck
+
 
 def app():
 
