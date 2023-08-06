@@ -9,8 +9,8 @@ def app():
     with st.container():
         col1, col2 = st.columns(2)
 
-        col1.image('logo_uniandes.png')  # replace with your image file
-        col2.image('terminator.png')  # replace with your image file
+        col1.image('logo_uniandes.png')  
+        col2.image('terminator.png')  
 
     with st.container():
         st.markdown("Vamos a emprender en los tiempos de los LLMs")
