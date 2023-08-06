@@ -51,24 +51,24 @@ def app():
 
             if option_propuesta_valor == "Sí":
                 propuesta_valor_proyecto = st.text_input("¿Cuál es?")
-                if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor')):
+                if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor'):
                     # Call your function here
                     generar_prop_valor_usuario(propuesta_valor_proyecto)
 
             elif option_propuesta_valor == "No":
-                if st.button('Generar Propuesta de Valor sin Definir', key='boton_generar_propuesta_valor_0')):
+                if st.button('Generar Propuesta de Valor sin Definir', key='boton_generar_propuesta_valor_0'):
                     # Call your function here
                     generar_propvalor()
 
     with st.container():
         st.markdown("Generar un modelo de negocio")
-        if st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio')):
+        if st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio'):
             # Call your function here
             generar_modelo_negocio()
 
     with st.container():
         st.markdown("Generar un pitch deck")
-        if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck')):
+        if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck'):
             # Call your function here
             generar_pitchdeck()
         
