@@ -39,21 +39,26 @@ def app():
                 # Call your function here
                 generar_desde_azar(azar_proyecto)
 
-    with st.container():
-        st.markdown("¿Tienes definida la propuesta de valor?")
+    # Create an empty placeholder for the container
+    propuesta_valor_container = st.empty()
 
-        option_propuesta_valor = st.selectbox('Selecciona una opción', ["", "Sí", "No"])
+    # Check if the user has selected an option and clicked a button
+    if st.button('Generar Mercado') or st.button('Generar Problema') or st.button('Generar Azar'):
+        # Fill the placeholder with the container and its contents
+        with propuesta_valor_container.container():
+            st.markdown("¿Tienes definida la propuesta de valor?")
+            option_propuesta_valor = st.selectbox('Selecciona una opción', ["", "Sí", "No"])
 
-        if option_propuesta_valor == "Sí":
-            propuesta_valor_proyecto = st.text_input("¿Cuál es?")
-            if st.button('Generar Propuesta de Valor'):
-                # Call your function here
-                generar_prop_valor_usuario(propuesta_valor_proyecto)
+            if option_propuesta_valor == "Sí":
+                propuesta_valor_proyecto = st.text_input("¿Cuál es?")
+                if st.button('Generar Propuesta de Valor'):
+                    # Call your function here
+                    generar_prop_valor_usuario(propuesta_valor_proyecto)
 
-        elif option_propuesta_valor == "No":
-            if st.button('Generar Propuesta de Valor sin Definir'):
-                # Call your function here
-                generar_propvalor()
+            elif option_propuesta_valor == "No":
+                if st.button('Generar Propuesta de Valor sin Definir'):
+                    # Call your function here
+                    generar_propvalor()
 
     with st.container():
         st.markdown("Generar un modelo de negocio")
