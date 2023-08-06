@@ -17,7 +17,8 @@ def app():
 
         st.markdown("Tu emprendimiento/proyecto parte de:")
 
-        option = st.selectbox('Selecciona una opción', ["El interés de atender un mercado", 
+        option = st.selectbox('Selecciona una opción', ["",
+                                                        "El interés de atender un mercado", 
                                                         "El interés de solucionar un problema particular", 
                                                         "No tengo aún nada definido"])
         
@@ -42,7 +43,7 @@ def app():
     with st.container():
         st.markdown("¿Tienes definida la propuesta de valor?")
 
-        option_propuesta_valor = st.selectbox('Selecciona una opción', ["Sí", "No"])
+        option_propuesta_valor = st.selectbox('Selecciona una opción', ["", "Sí", "No"])
 
         if option_propuesta_valor == "Sí":
             propuesta_valor_proyecto = st.text_input("¿Cuál es?")
