@@ -35,7 +35,6 @@ def app():
                 generar_desde_problema(problema_proyecto)
 
         elif option == "No tengo aún nada definido":
-            azar_proyecto = st.text_input("No tengo aún nada definido")
             if st.button('Generar Azar'):
                 # Call your function here
                 generar_desde_azar(azar_proyecto)
