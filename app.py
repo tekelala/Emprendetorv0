@@ -6,7 +6,7 @@ def app():
 
     st.markdown("Este es un aplicativo diseñado para uso académico en la clase Emprendimiento e Innovación de la Universidad de los Andes por el profesor Camilo Serna Zamora")
 
-    col1, col2 = st.beta_columns(2)
+    col1, col2 = st.columns(2)
 
     col1.image('image1.png')  # replace with your image file
     col2.image('image2.png')  # replace with your image file
