@@ -30,7 +30,7 @@ def app():
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
-            if st.button('Generar Problema', key='boton_generar_problema')):
+            if st.button('Generar Problema', key='boton_generar_problema'):
                 # Call your function here
                 generar_desde_problema(problema_proyecto)
 
