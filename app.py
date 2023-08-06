@@ -24,7 +24,7 @@ def app():
         
         if option == "El interés de atender un mercado":
             mercado_proyecto = st.text_input("¿Cuál mercado?")
-            if st.button('Generar Mercado', key='boton_generar_mercado')):
+            if st.button('Generar Mercado', key='boton_generar_mercado'):
                 # Call your function here
                 generar_desde_mercado(mercado_proyecto)
 
