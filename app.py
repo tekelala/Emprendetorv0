@@ -135,6 +135,7 @@ def app():
 
                         # Display the result
                         st.write(propuesta_valor)
+                        st.session_state.container_2 = True
                         
 
             elif option_propuesta_valor == "No":
@@ -146,6 +147,7 @@ def app():
 
                         # Display the result
                         st.write(propuesta_valor)
+                        st.session_state.container_2 = True
 
                    
 
@@ -159,6 +161,7 @@ def app():
 
                         # Display the result
                         st.write(modelo_negocio)
+                        st.session_state.container_3 = True
 
 
             if 'container_3' in st.session_state and st.session_state.container_3:
