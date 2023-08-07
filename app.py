@@ -3,30 +3,26 @@ import requests
 import json
 from functions import generar_desde_mercado, generar_desde_problema, generar_desde_azar, generar_prop_valor_usuario, generar_propvalor, generar_modelo_negocio, generar_pitchdeck
 
-# define variables
-problema = ""
-propuesta_valor = ""
-modelo_negocio = ""
-pitch_deck = ""
 
-# Open the file in write mode
-with open('answers.txt', 'w') as f:
-    # Write each answer to the file
-    f.write('Problema:\n')
-    f.write(problema)
-    f.write('\n\n')
+def write_answers_to_txt():
+    # Open the file in write mode
+    with open('answers.txt', 'w') as f:
+        # Write each answer to the file
+        f.write('Problema:\n')
+        f.write(st.session_state.problema)
+        f.write('\n\n')
 
-    f.write('Propuesta de Valor:\n')
-    f.write(propuesta_valor)
-    f.write('\n\n')
+        f.write('Propuesta de Valor:\n')
+        f.write(st.session_state.propuesta_valor)
+        f.write('\n\n')
 
-    f.write('Modelo de Negocio:\n')
-    f.write(modelo_negocio)
-    f.write('\n\n')
+        f.write('Modelo de Negocio:\n')
+        f.write(st.session_state.modelo_negocio)
+        f.write('\n\n')
 
-    f.write('Pitch Deck:\n')
-    f.write(pitch_deck)
-    f.write('\n')
+        f.write('Pitch Deck:\n')
+        f.write(st.session_state.pitch_deck)
+        f.write('\n')
 
 
 # Claude functions
@@ -208,10 +204,10 @@ def app():
                     if st.button('Descargar negocio'):
                         with st.spinner('Preparando...'):
                             # Call the function to write the answers to a .txt file
-                            write_answers_to_txt(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio, st.session_state.pitch_deck)
+                            write_answers_to_txt()
 
                             # Provide a download link
-                            st.markdown('<a href="answers.txt" download="answers.txt">Click here to download the .txt file</a>', unsafe_allow_html=True)  
+                            st.markdown('<a href="answers.txt" download="answers.txt">Click here to download the .txt file</a>', unsafe_allow_html=True)
 
         
 if __name__ == "__main__":
