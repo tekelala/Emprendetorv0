@@ -71,7 +71,7 @@ def generar_modelo_negocio(problema, propuesta_valor):
     Task 9: write "Riesgos y mitigantes".
     Task 10: enumerate and describe each risk and how to manage it, that needs to be faced to develop the business.
     Task 11: write "Necesidad de inversión".
-    Task 12: estimate in USD the investment needed and how it will be used to develop the business.'''
+    Task 12: estimate in COP the investment needed and how it will be used to develop the business.'''
 
     return prompts
 
