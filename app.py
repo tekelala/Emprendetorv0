@@ -87,9 +87,9 @@ def app():
         if "prompts" not in st.session_state:
             st.session_state.prompts = ""
         
-        st.header("Vamos a emprender en los tiempos de los LLMs")
+        st.subheader("Vamos a emprender en los tiempos de los LLMs")
 
-        st.header("Tu emprendimiento/proyecto parte de:")
+        st.subheader("Tu emprendimiento/proyecto parte de:")
 
         option = st.selectbox('Selecciona una opción', ["",
                                                         "El interés de atender un mercado", 
@@ -136,7 +136,7 @@ def app():
 
     if 'container_1' in st.session_state and st.session_state.container_1:
         with st.container():
-            st.header("¿Tienes definida la propuesta de valor?")
+            st.subheader("¿Tienes definida la propuesta de valor?")
             option_propuesta_valor = st.selectbox('Selecciona una opción', ["", "Sí", "No"])
 
             if option_propuesta_valor == "Sí":
@@ -170,7 +170,7 @@ def app():
 
         if 'container_2' in st.session_state and st.session_state.container_2:
             with st.container():
-                st.header("Generar un modelo de negocio")
+                st.subheader("Generar un modelo de negocio")
                 if st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio'):
                     with st.spinner('Escribiendo...'):
                         # Create the answer
@@ -185,7 +185,7 @@ def app():
 
             if 'container_3' in st.session_state and st.session_state.container_3:
                 with st.container():
-                    st.header("Generar pitch deck")
+                    st.subheader("Generar pitch deck")
                     if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck'):
                         with st.spinner('Escribiendo...'):
                             # Create the answer
@@ -207,7 +207,7 @@ def app():
                             write_answers_to_txt()
 
                             # Provide a download link
-                            st.header('<a href="answers.txt" download="answers.txt">Click here to download the .txt file</a>', unsafe_allow_html=True)
+                            st.subheader('<a href="answers.txt" download="answers.txt">Click here to download the .txt file</a>', unsafe_allow_html=True)
 
         
 if __name__ == "__main__":
