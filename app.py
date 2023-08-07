@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 import json
+from docx import Document
+import os
 from functions import generar_desde_mercado, generar_desde_problema, generar_desde_azar, generar_prop_valor_usuario, generar_propvalor, generar_modelo_negocio, generar_pitchdeck
 
 # define variables
@@ -8,6 +10,25 @@ problema = ""
 propuesta_valor = ""
 modelo_negocio = ""
 pitch_deck = ""
+
+def write_answers_to_doc(problema, propuesta_valor, modelo_negocio, pitch_deck):
+    doc = Document()
+
+    # Add each answer to the document
+    doc.add_heading('Problema', level=1)
+    doc.add_paragraph(problema)
+
+    doc.add_heading('Propuesta de Valor', level=1)
+    doc.add_paragraph(propuesta_valor)
+
+    doc.add_heading('Modelo de Negocio', level=1)
+    doc.add_paragraph(modelo_negocio)
+
+    doc.add_heading('Pitch Deck', level=1)
+    doc.add_paragraph(pitch_deck)
+
+    # Save the document to a temporary location
+    doc.save('/tmp/answers.docx')
 
 # Claude functions
 def create_text(prompt):
@@ -61,7 +82,7 @@ def app():
         col1, col2 = st.columns(2)
 
         col1.image('logo_uniandes.png')  
-        col2.image('terminator.png')  
+        col2.image('bobo.jpg')  
 
     with st.container():
         
@@ -167,13 +188,20 @@ def app():
                 with st.container():
                     st.markdown("Generar un pitch deck")
                     if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck'):
-                        # Create the answer
-                        st.session_state.pitch_deck = create_text(generar_pitchdeck(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio))
+                        with st.spinner('Escribiendo...'):
+                            # Create the answer
+                            st.session_state.pitch_deck = create_text(generar_pitchdeck(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio))
 
-                        # Display the result
-                        st.write(st.session_state.pitch_deck)
+                            # Display the result
+                            st.write(st.session_state.pitch_deck)
                         
-                      
+if st.button('Descargar negocio'):
+        with st.spinner('Preparando...'):
+            # Call the function to write the answers to a .doc file
+            write_answers_to_doc(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio, st.session_state.pitch_deck)
+
+            # Provide a download link
+            st.markdown('<a href="/tmp/answers.docx" download="answers.docx">Click here to download the .doc file</a>', unsafe_allow_html=True)         
 
         
 if __name__ == "__main__":
