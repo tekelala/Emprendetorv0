@@ -130,10 +130,10 @@ def app():
                     with st.spinner('Escribiendo...'):
                         # Create the answer
 
-                        propuesta_valor = create_text(generar_prop_valor_usuario(problema, propuesta_valor_proyecto))
+                        st.session_state.propuesta_valor = create_text(generar_prop_valor_usuario(problema, propuesta_valor_proyecto))
 
                         # Display the result
-                        st.write(propuesta_valor)
+                        st.write(st.session_state.propuesta_valor)
                         st.session_state.container_2 = True
                         
 
@@ -142,10 +142,10 @@ def app():
                     # Call your function here
                     with st.spinner('Escribiendo...'):
                         # Create the answer
-                        propuesta_valor = create_text(generar_propvalor(problema))
+                        st.session_state.propuesta_valor = create_text(generar_propvalor(problema))
 
                         # Display the result
-                        st.write(propuesta_valor)
+                        st.write(st.session_state.propuesta_valor)
                         st.session_state.container_2 = True
 
                    
@@ -156,10 +156,10 @@ def app():
                 if st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio'):
                     with st.spinner('Escribiendo...'):
                         # Create the answer
-                        modelo_negocio = create_text(generar_modelo_negocio(problema, propuesta_valor))
+                        st.session_state.modelo_negocio = create_text(generar_modelo_negocio(problema, propuesta_valor))
 
                         # Display the result
-                        st.write(modelo_negocio)
+                        st.write(st.session_state.modelo_negocio)
                         st.session_state.container_3 = True
 
 
@@ -168,10 +168,10 @@ def app():
                     st.markdown("Generar un pitch deck")
                     if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck'):
                         # Create the answer
-                        pitch_deck = create_text(generar_pitchdeck(problema, propuesta_valor, modelo_negocio))
+                        st.session_state.pitch_deck = create_text(generar_pitchdeck(problema, propuesta_valor, modelo_negocio))
 
                         # Display the result
-                        st.write(pitch_deck)
+                        st.write(st.session_state.pitch_deck)
                         
                       
 
