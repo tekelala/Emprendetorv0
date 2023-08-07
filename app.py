@@ -9,24 +9,24 @@ propuesta_valor = ""
 modelo_negocio = ""
 pitch_deck = ""
 
-    # Open the file in write mode
-    with open('answers.txt', 'w') as f:
-        # Write each answer to the file
-        f.write('Problema:\n')
-        f.write(problema)
-        f.write('\n\n')
+# Open the file in write mode
+with open('answers.txt', 'w') as f:
+    # Write each answer to the file
+    f.write('Problema:\n')
+    f.write(problema)
+    f.write('\n\n')
 
-        f.write('Propuesta de Valor:\n')
-        f.write(propuesta_valor)
-        f.write('\n\n')
+    f.write('Propuesta de Valor:\n')
+    f.write(propuesta_valor)
+    f.write('\n\n')
 
-        f.write('Modelo de Negocio:\n')
-        f.write(modelo_negocio)
-        f.write('\n\n')
+    f.write('Modelo de Negocio:\n')
+    f.write(modelo_negocio)
+    f.write('\n\n')
 
-        f.write('Pitch Deck:\n')
-        f.write(pitch_deck)
-        f.write('\n')
+    f.write('Pitch Deck:\n')
+    f.write(pitch_deck)
+    f.write('\n')
 
 
 # Claude functions
