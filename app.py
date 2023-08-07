@@ -47,8 +47,12 @@ def create_text(prompt):
     # Extract Claude's response from the JSON response
     result = response.json()
 
+    # Save the result in the session state
+    st.session_state.result = result['completion']
+
     # Return Claude's response as a string
     return result['completion']
+
 
 def app():
 
