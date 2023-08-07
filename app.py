@@ -193,15 +193,18 @@ def app():
 
                             # Display the result
                             st.write(st.session_state.pitch_deck)
+                            st.session_state.container_4 = True
                         
-# At the end of your app() function, add a button for downloading the .txt file
-    if st.button('Descargar negocio'):
-        with st.spinner('Preparando...'):
-            # Call the function to write the answers to a .txt file
-            write_answers_to_txt(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio, st.session_state.pitch_deck)
+            if 'container_4' in st.session_state and st.session_state.container_4:
+                with st.container():
+                    # At the end of your app() function, add a button for downloading the .txt file
+                    if st.button('Descargar negocio'):
+                        with st.spinner('Preparando...'):
+                            # Call the function to write the answers to a .txt file
+                            write_answers_to_txt(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio, st.session_state.pitch_deck)
 
-            # Provide a download link
-            st.markdown('<a href="answers.txt" download="answers.txt">Click here to download the .txt file</a>', unsafe_allow_html=True)  
+                            # Provide a download link
+                            st.markdown('<a href="answers.txt" download="answers.txt">Click here to download the .txt file</a>', unsafe_allow_html=True)  
 
         
 if __name__ == "__main__":
