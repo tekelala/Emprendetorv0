@@ -8,7 +8,7 @@ if "result" not in st.session_state:
     st.session_state.result = ""
 
 # Claude functions
-def create_text(prompt, user_changes):
+def create_text(prompt):
     api_url = "https://api.anthropic.com/v1/complete"
     headers = {
         "Content-Type": "application/json",
@@ -17,15 +17,13 @@ def create_text(prompt, user_changes):
 
     # Prepare the prompt for Claude
     conversation = f"Human: {prompt}\n\nAssistant:"
-    if user_changes:
-        conversation += f" Please change the communications piece with the following instructions: {user_changes.strip()}"
 
     # Define the body of the request
     body = {
         "prompt": conversation,
         "model": "claude-2.0",
+        "max_tokens_to_sample": 10000,
         "temperature": 0.6,
-        "max_tokens_to_sample": 100000,
         "stop_sequences": ["\n\nHuman:"]
     }
 
@@ -47,8 +45,8 @@ def create_text(prompt, user_changes):
     # Extract Claude's response from the JSON response
     result = response.json()
 
-    # Return Claude's response as a string
-    return result['completion']
+    # Return Claude's response as a dictionary
+    return result
 
 
 def app():
