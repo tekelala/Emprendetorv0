@@ -35,17 +35,7 @@ def generar_desde_azar():
 
     return prompts
 
-def generar_prop_valor_usuario(problema):
-    prompts = f'''Role: You are top entrepreneur. Do the following tasks and answer always in Spanish. 
-    Task 1: write "Propuesta de Valor:"
-    Task 2: write a value proposition that solves the the problems and jobs to be done defined in the following text {problema}
-    Task 3: write "Atributos de la propuesta de valor"
-    Task 4: describe the atributes of the value proposition you defined in the previous task. 
-    Task 5: if there is a different value proposition for each customer segment enumerate and describe them.'''
-
-    return prompts
-
-def generar_propvalor(problema, propuesta_valor_proyecto):
+def generar_prop_valor_usuario(problema, propuesta_valor_proyecto):
     prompts = f'''Role: You are top entrepreneur. Analyze this value proposition {propuesta_valor_proyecto} for the following market and customers {problema}. Do the following tasks and answer always in Spanish. 
     Task 1: write "Propuesta de Valor:"
     Task 2: write the results of your analysis of the value proposition and propose and improved value proposition that solves the the problems and jobs to be done.
@@ -54,6 +44,17 @@ def generar_propvalor(problema, propuesta_valor_proyecto):
     Task 5: if there is a different value proposition for each customer segment enumerate and describe them.'''
 
     return prompts
+
+def generar_propvalor(problema):
+    prompts = f'''Role: You are top entrepreneur. Analyze this value proposition {propuesta_valor_proyecto} for the following market and customers {problema}. Do the following tasks and answer always in Spanish. 
+    Task 1: write "Propuesta de Valor:"
+    Task 2: write the results of your analysis of the value proposition and propose and improved value proposition that solves the the problems and jobs to be done.
+    Task 3: write "Atributos de la propuesta de valor"
+    Task 4: describe the atributes of the value proposition in the previous task. 
+    Task 5: if there is a different value proposition for each customer segment enumerate and describe them.'''
+
+    return prompts
+
 
 def generar_modelo_negocio(problema, propuesta_valor):
     prompts = f'''Role: You are top entrepreneur. Analyze this value proposition {propuesta_valor} for the following market and customers {problema}. Do the following tasks and answer always in Spanish. 
@@ -75,8 +76,11 @@ def generar_modelo_negocio(problema, propuesta_valor):
     return prompts
 
 def generar_pitchdeck(problema, propuesta_valor, modelo_negocio):
-    # Your code here
-    
+    prompts = f'''Role: You are Nancy Duarte an expert in crafting slide Decks for startups and your audience are judges in an entrepreneurship competition. You are creating a slide Deck. Do the following tasks and answer always in Spanish.
+                Task 1: Deeply analize the following information about the business: {problema}, {propuesta_valor}, {modelo_negocio}. 
+                Task 2: Craft the slides deck with the following steps: Step 1. The Title of each slide and the information that should be in the slide; 
+                Step 2 A suggestion of the visuals in the slide and Step 3 The rationale behind the slide, why it is important.'''
+
     return prompts
 
 
