@@ -50,6 +50,7 @@ def create_text(prompt, user_changes):
     # Return Claude's response as a string
     return result['completion']
 
+
 def app():
 
     st.title("Emprendetor v0")
