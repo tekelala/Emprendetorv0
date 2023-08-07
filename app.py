@@ -95,12 +95,11 @@ def app():
 
                     # Allow the user to propose changes
                     if st.session_state.result != "":
-                        user_changes = st.text_input('Propón ajustes a la respuesta:')
-                        if st.button('Apply Changes'):
+                        user_changes = st.text_input('Propón cambios a la respuesta:')
+                        if st.button('Aplicando cambios'):
                             if user_changes:
-                                st.session_state.prompts += f" Please change the text of the answer with the following instructions: {user_changes.strip()}"
-                                with st.spinner('Aplicando...'):
-                                    st.session_state.result = create_text(st.session_state.prompts)
+                                # Append the user's suggestion directly to the previous result
+                                st.session_state.result += f"\n\nUser Suggestion: {user_changes.strip()}"
                                 st.write(st.session_state.result)
 
                     st.session_state.container_1 = True
