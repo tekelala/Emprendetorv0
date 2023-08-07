@@ -92,6 +92,8 @@ def app():
                     st.write(problema)
                     st.session_state.container_1 = True
 
+
+
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
             if st.button('Generar Problema', key='boton_generar_problema'):
