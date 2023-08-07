@@ -82,7 +82,7 @@ def app():
             mercado_proyecto = st.text_input("¿Cuál mercado?")
             if st.button('Generar Mercado', key='boton_generar_mercado'):
                 # Call your function here
-                with st.spinner('Writting...'):
+                with st.spinner('Escribiendo...'):
                     # Create the 'prompts' variable
                     st.session_state.prompts = generar_desde_mercado(mercado_proyecto)
 
