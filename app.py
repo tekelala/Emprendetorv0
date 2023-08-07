@@ -94,22 +94,42 @@ def app():
                     # Display the result
                     st.write(st.session_state.result)
 
-                    st.write(texto_mercado)
-
                     st.session_state.container_1 = True
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
             if st.button('Generar Problema', key='boton_generar_problema'):
                 # Call your function here
-                generar_desde_problema(problema_proyecto)
-                st.session_state.container_1 = True
+                with st.spinner('Escribiendo...'):
+                    # Create the 'prompts' variable
+                    st.session_state.prompts = generar_desde_problema(problema_proyecto)
+
+                    # Call the 'send_message()' function with the 'prompts' variable
+                    st.session_state.result = create_text(st.session_state.prompts)
+
+                    texto_problema = st.session_state.result
+
+                    # Display the result
+                    st.write(st.session_state.result)
+
+                    st.session_state.container_1 = True
 
         elif option == "No tengo aún nada definido":
             if st.button('Generar Azar', key='boton_generar_azar'):
                 # Call your function here
-                generar_desde_azar(azar_proyecto)
-                st.session_state.container_1 = True
+                with st.spinner('Escribiendo...'):
+                    # Create the 'prompts' variable
+                    st.session_state.prompts = generar_desde_azar()
+
+                    # Call the 'send_message()' function with the 'prompts' variable
+                    st.session_state.result = create_text(st.session_state.prompts)
+
+                    azar_problema = st.session_state.result
+
+                    # Display the result
+                    st.write(st.session_state.result)
+
+                    st.session_state.container_1 = True
 
     if 'container_1' in st.session_state and st.session_state.container_1:
         with st.container():
