@@ -86,12 +86,11 @@ def app():
                 # Call your function here
                 with st.spinner('Escribiendo...'):
                     # Create the answer
-                    problema = create_text(generar_desde_mercado(mercado_proyecto))
+                    st.session_state.problema = create_text(generar_desde_mercado(mercado_proyecto))
 
                     # Display the result
-                    st.write(problema)
+                    st.write(st.session_state.problema)
                     st.session_state.container_1 = True
-
 
 
         elif option == "El interés de solucionar un problema particular":
@@ -100,10 +99,10 @@ def app():
                 # Call your function here
                 with st.spinner('Escribiendo...'):
                     # Create the answer
-                    problema = create_text(generar_desde_problema(problema_proyecto))
+                    st.session_state.problema = create_text(generar_desde_problema(problema_proyecto))
 
                     # Display the result
-                    st.write(problema)
+                    st.write(st.session_state.problema)
                     st.session_state.container_1 = True
 
 
@@ -112,10 +111,10 @@ def app():
                 # Call your function here
                 with st.spinner('Escribiendo...'):
                     # Create the answer
-                    problema = create_text(generar_desde_azar())
+                    st.session_state.problema = create_text(generar_desde_azar())
 
                     # Display the result
-                    st.write(problema)
+                    st.write(st.session_state.problema)
                     st.session_state.container_1 = True
 
 
