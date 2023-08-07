@@ -90,6 +90,7 @@ def app():
 
                     # Display the result
                     st.write(problema)
+                    st.session_state.container_1 = True
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
@@ -101,6 +102,7 @@ def app():
 
                     # Display the result
                     st.write(problema)
+                    st.session_state.container_1 = True
 
 
         elif option == "No tengo aún nada definido":
@@ -112,6 +114,7 @@ def app():
 
                     # Display the result
                     st.write(problema)
+                    st.session_state.container_1 = True
 
 
     if 'container_1' in st.session_state and st.session_state.container_1:
