@@ -216,7 +216,7 @@ def app():
                         with st.spinner('Preparando...'):
                             file_path = write_answers_to_txt()
                             href = create_download_link(file_path)
-                            st.subheader(href, unsafe_allow_html=True)
+                             st.markdown(href, unsafe_allow_html=True)
 
         
 if __name__ == "__main__":
