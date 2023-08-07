@@ -22,7 +22,7 @@ def create_text(prompt):
     body = {
         "prompt": conversation,
         "model": "claude-2.0",
-        "max_tokens_to_sample": 10000,
+        "max_tokens_to_sample": 100000,
         "temperature": 0.6,
         "stop_sequences": ["\n\nHuman:"]
     }
@@ -42,11 +42,11 @@ def create_text(prompt):
     except Exception as e:
         st.error(f"Unexpected error: {e}")
 
-    # Extract Claude's response from the JSON response
+     # Extract Claude's response from the JSON response
     result = response.json()
 
-    # Return Claude's response as a dictionary
-    return result
+    # Return Claude's response as a string
+    return result['completion'].strip()
 
 
 def app():
