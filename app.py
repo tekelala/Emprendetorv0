@@ -1,12 +1,13 @@
 import streamlit as st
 import requests
 import json
+import base64
 from functions import generar_desde_mercado, generar_desde_problema, generar_desde_azar, generar_prop_valor_usuario, generar_propvalor, generar_modelo_negocio, generar_pitchdeck
 
 
 def write_answers_to_txt():
-    # Open the file in write mode
-    with open('negocio.txt', 'w') as f:
+    file_name = 'answers.txt'
+    with open(file_name, 'w') as f:
         # Write each answer to the file
         f.write('Problema:\n')
         f.write(st.session_state.problema)
@@ -23,6 +24,16 @@ def write_answers_to_txt():
         f.write('Pitch Deck:\n')
         f.write(st.session_state.pitch_deck)
         f.write('\n')
+    
+    return file_name
+
+def create_download_link(file_path):
+    with open(file_path, 'rb') as f:
+        bytes = f.read()
+        b64 = base64.b64encode(bytes).decode()
+        href = f'<a href="data:file/txt;base64,{b64}" download=\'{file_path}\'>Click here to download the .txt file</a>'
+        return href
+
 
 
 # Claude functions
@@ -203,11 +214,9 @@ def app():
                     # At the end of your app() function, add a button for downloading the .txt file
                     if st.button('Descargar negocio'):
                         with st.spinner('Preparando...'):
-                            # Call the function to write the answers to a .txt file
-                            write_answers_to_txt()
-
-                            # Provide a download link
-                            st.subheader('<a href="answers.txt" download="answers.txt">Click here to download the .txt file</a>', unsafe_allow_html=True)
+                            file_path = write_answers_to_txt()
+                            href = create_download_link(file_path)
+                            st.subheader(href, unsafe_allow_html=True)
 
         
 if __name__ == "__main__":
