@@ -89,8 +89,12 @@ def app():
                     # Call the 'send_message()' function with the 'prompts' variable
                     st.session_state.result = create_text(st.session_state.prompts)
 
+                    texto_mercado = st.session_state.result
+
                     # Display the result
                     st.write(st.session_state.result)
+
+                    st.write(texto_mercado)
 
                     st.session_state.container_1 = True
 
