@@ -61,52 +61,38 @@ def app():
         col1.image('logo_uniandes.png')  
         col2.image('terminator.png')  
 
-    with st.container():
-        
+   with st.container():
+
         # Initialize session state variables if not already done
         if "result" not in st.session_state:
             st.session_state.result = ""
         if "prompts" not in st.session_state:
             st.session_state.prompts = ""
-        
+
         st.markdown("Vamos a emprender en los tiempos de los LLMs")
 
         st.markdown("Tu emprendimiento/proyecto parte de:")
 
         option = st.selectbox('Selecciona una opción', ["",
-                                                        "El interés de atender un mercado", 
-                                                        "El interés de solucionar un problema particular", 
-                                                        "No tengo aún nada definido"])
-        
+                                                            "El interés de atender un mercado", 
+                                                            "El interés de solucionar un problema particular", 
+                                                            "No tengo aún nada definido"])
+
         if option == "El interés de atender un mercado":
             mercado_proyecto = st.text_input("¿Cuál mercado?")
             if st.button('Generar Mercado', key='boton_generar_mercado'):
                 # Call your function here
                 with st.spinner('Escribiendo...'):
                     # Create the 'prompts' variable
-                    st.session_state.prompts = generar_desde_mercado(mercado_proyecto)
+                    generado_mercado = generar_desde_mercado(mercado_proyecto)
 
                     # Call the 'send_message()' function with the 'prompts' variable
-                    st.session_state.result = create_text(st.session_state.prompts)
+                    st.session_state.result = create_text(generado_mercado)
 
                     # Display the result
                     st.write(st.session_state.result)
-                    
 
-                    # Allow the user to propose changes
-                    if st.session_state.result != "":
-                        user_changes = st.text_input('Propón ajustes a la respuesta:')
-                        if st.button('Aplicando cambios'):
-                            if user_changes:
-                                # Replace the previous result with the user's suggestion
-                                st.session_state.result = user_changes.strip()
-                                st.write(st.session_state.result)
-
-                                # Update the prompt for the next round of conversation
-                                st.session_state.prompts = st.session_state.result
-
-
-                                st.session_state.container_1 = True
+                        
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
