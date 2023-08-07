@@ -8,7 +8,7 @@ if "result" not in st.session_state:
     st.session_state.result = ""
 
 # Claude functions
-def create_text(prompt, user_changes):
+def create_text(prompt):
     api_url = "https://api.anthropic.com/v1/complete"
     headers = {
         "Content-Type": "application/json",
@@ -17,15 +17,13 @@ def create_text(prompt, user_changes):
 
     # Prepare the prompt for Claude
     conversation = f"Human: {prompt}\n\nAssistant:"
-    if user_changes:
-        conversation += f" Please change the communications piece with the following instructions: {user_changes.strip()}"
 
     # Define the body of the request
     body = {
         "prompt": conversation,
         "model": "claude-2.0",
-        "temperature": 0.6,
         "max_tokens_to_sample": 100000,
+        "temperature": 0.6,
         "stop_sequences": ["\n\nHuman:"]
     }
 
@@ -44,11 +42,12 @@ def create_text(prompt, user_changes):
     except Exception as e:
         st.error(f"Unexpected error: {e}")
 
-    # Extract Claude's response from the JSON response
+     # Extract Claude's response from the JSON response
     result = response.json()
 
     # Return Claude's response as a string
-    return result['completion']
+    return result['completion'].strip()
+
 
 def app():
 
@@ -90,8 +89,6 @@ def app():
                     # Call the 'send_message()' function with the 'prompts' variable
                     st.session_state.result = create_text(st.session_state.prompts)
 
-                    # Display the prompt
-                    #st.write(st.session_state.prompts)
                     # Display the result
                     st.write(st.session_state.result)
                     
@@ -102,7 +99,7 @@ def app():
                         if st.button('Apply Changes'):
                             if user_changes:
                                 st.session_state.prompts += f" Please change the text of the answer with the following instructions: {user_changes.strip()}"
-                                with st.spinner('Aplicando cambios...'):
+                                with st.spinner('Aplicando...'):
                                     st.session_state.result = create_text(st.session_state.prompts)
                                 st.write(st.session_state.result)
 
@@ -115,13 +112,11 @@ def app():
                 generar_desde_problema(problema_proyecto)
                 st.session_state.container_1 = True
 
-        if option == "No tengo aún nada definido":
-            with st.container():
-                st.markdown("Generar Azar")
-                if st.button('Generar Azar', key='boton_generar_azar'):
-                    # Call your function here
-                    generar_desde_azar(azar_proyecto)
-                    st.session_state.container_1 = True
+        elif option == "No tengo aún nada definido":
+            if st.button('Generar Azar', key='boton_generar_azar'):
+                # Call your function here
+                generar_desde_azar(azar_proyecto)
+                st.session_state.container_1 = True
 
     if 'container_1' in st.session_state and st.session_state.container_1:
         with st.container():

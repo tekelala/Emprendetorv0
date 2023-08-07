@@ -98,8 +98,8 @@ def app():
                         user_changes = st.text_input('Propón cambios a la respuesta:')
                         if st.button('Aplicando cambios'):
                             if user_changes:
-                                # Append the user's suggestion directly to the previous result
-                                st.session_state.result += f"\n\nUser Suggestion: {user_changes.strip()}"
+                                # Replace the previous result with the user's suggestion
+                                st.session_state.result = user_changes.strip()
                                 st.write(st.session_state.result)
 
                     st.session_state.container_1 = True
