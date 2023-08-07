@@ -9,7 +9,6 @@ if "result" not in st.session_state:
 if "previous_answer" not in st.session_state:
     st.session_state.previous_answer = ""
 
-# Claude functions
 def create_text(prompt):
     api_url = "https://api.anthropic.com/v1/complete"
     headers = {
@@ -53,7 +52,6 @@ def create_text(prompt):
     # Return Claude's response as a string
     return result['completion']
 
-
 def app():
 
     st.title("Emprendetor v0")
@@ -71,9 +69,7 @@ def app():
         # Initialize session state variables if not already done
         if "result" not in st.session_state:
             st.session_state.result = ""
-        if "previous_answer" not in st.session_state:
-            st.session_state.previous_answer = ""
-        
+
         st.markdown("Vamos a emprender en los tiempos de los LLMs")
 
         st.markdown("Tu emprendimiento/proyecto parte de:")
@@ -87,46 +83,29 @@ def app():
             mercado_proyecto = st.text_input("¿Cuál mercado?")
             if st.button('Generar Mercado', key='boton_generar_mercado'):
                 # Call your function here
-                with st.spinner('Writting...'):
-                    # Create the 'prompts' variable
-                    st.session_state.prompts = generar_desde_mercado(mercado_proyecto)
+                result = create_text(mercado_proyecto)
 
-                    # Call the 'send_message()' function with the 'prompts' variable
-                    st.session_state.result = create_text(st.session_state.prompts)
-
-                    # Display the result
-                    previous_answer = st.session_state.result
-
-                    # Allow the user to propose changes
-                    if st.session_state.result != "":
-                        user_changes = st.text_input('Propose changes to the deck:')
-                        if st.button('Apply Changes'):
-                            if user_changes:
-                                st.session_state.prompts += f" Please change the communications piece with the following instructions: {user_changes.strip()}"
-                                with st.spinner('Applying changes...'):
-                                    st.session_state.result = create_text(st.session_state.prompts)
-                                st.write(st.session_state.result)
-                                # Restore the previous answer
-                                st.session_state.result = previous_answer
-
-                    st.session_state.container_1 = True
-
-
+                # Display the result
+                st.write(result)
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
             if st.button('Generar Problema', key='boton_generar_problema'):
                 # Call your function here
-                generar_desde_problema(problema_proyecto)
-                st.session_state.container_1 = True
+                result = create_text(problema_proyecto)
+
+                # Display the result
+                st.write(result)
 
         elif option == "No tengo aún nada definido":
             if st.button('Generar Azar', key='boton_generar_azar'):
                 # Call your function here
-                generar_desde_azar(azar_proyecto)
-                st.session_state.container_1 = True
+                result = create_text()
 
-    if 'container_1' in st.session_state and st.session_state.container_1:
+                # Display the result
+                st.write(result)
+
+        if 'container_1' in st.session_state and st.session_state.container_1:
         with st.container():
             st.markdown("¿Tienes definida la propuesta de valor?")
             option_propuesta_valor = st.selectbox('Selecciona una opción', ["", "Sí", "No"])
@@ -135,29 +114,39 @@ def app():
                 propuesta_valor_proyecto = st.text_input("¿Cuál es?")
                 if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor'):
                     # Call your function here
-                    generar_prop_valor_usuario(propuesta_valor_proyecto)
-                    st.session_state.container_2 = True
+                    result = create_text(propuesta_valor_proyecto)
+
+                    # Display the result
+                    st.write(result)
 
             elif option_propuesta_valor == "No":
                 if st.button('Generar Propuesta de Valor sin Definir', key='boton_generar_propuesta_valor_0'):
                     # Call your function here
-                    generar_propvalor()
-                    st.session_state.container_2 = True
+                    result = create_text()
+
+                    # Display the result
+                    st.write(result)
 
         if 'container_2' in st.session_state and st.session_state.container_2:
             with st.container():
                 st.markdown("Generar un modelo de negocio")
                 if st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio'):
                     # Call your function here
-                    generar_modelo_negocio()
-                    st.session_state.container_3 = True
+                    result = create_text()
+
+                    # Display the result
+                    st.write(result)
 
             if 'container_3' in st.session_state and st.session_state.container_3:
                 with st.container():
                     st.markdown("Generar un pitch deck")
                     if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck'):
                         # Call your function here
-                        generar_pitchdeck()
-        
+                        result = create_text()
+
+                        # Display the result
+                        st.write(result)
+
 if __name__ == "__main__":
     app()
+
