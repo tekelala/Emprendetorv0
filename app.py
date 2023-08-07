@@ -62,37 +62,37 @@ def app():
         col2.image('terminator.png')  
 
     with st.container():
+        
+        # Initialize session state variables if not already done
+        if "result" not in st.session_state:
+            st.session_state.result = ""
+        if "prompts" not in st.session_state:
+            st.session_state.prompts = ""
+        
+        st.markdown("Vamos a emprender en los tiempos de los LLMs")
 
-            # Initialize session state variables if not already done
-            if "result" not in st.session_state:
-                st.session_state.result = ""
-            if "prompts" not in st.session_state:
-                st.session_state.prompts = ""
+        st.markdown("Tu emprendimiento/proyecto parte de:")
 
-            st.markdown("Vamos a emprender en los tiempos de los LLMs")
+        option = st.selectbox('Selecciona una opción', ["",
+                                                        "El interés de atender un mercado", 
+                                                        "El interés de solucionar un problema particular", 
+                                                        "No tengo aún nada definido"])
+        
+        if option == "El interés de atender un mercado":
+            mercado_proyecto = st.text_input("¿Cuál mercado?")
+            if st.button('Generar Mercado', key='boton_generar_mercado'):
+                # Call your function here
+                with st.spinner('Escribiendo...'):
+                    # Create the 'prompts' variable
+                    st.session_state.prompts = generar_desde_mercado(mercado_proyecto)
 
-            st.markdown("Tu emprendimiento/proyecto parte de:")
+                    # Call the 'send_message()' function with the 'prompts' variable
+                    st.session_state.result = create_text(st.session_state.prompts)
 
-            option = st.selectbox('Selecciona una opción', ["",
-                                                                "El interés de atender un mercado", 
-                                                                "El interés de solucionar un problema particular", 
-                                                                "No tengo aún nada definido"])
+                    # Display the result
+                    st.write(st.session_state.result)
 
-            if option == "El interés de atender un mercado":
-                mercado_proyecto = st.text_input("¿Cuál mercado?")
-                if st.button('Generar Mercado', key='boton_generar_mercado'):
-                    # Call your function here
-                    with st.spinner('Escribiendo...'):
-                        # Create the 'prompts' variable
-                        generado_mercado = generar_desde_mercado(mercado_proyecto)
-
-                        # Call the 'send_message()' function with the 'prompts' variable
-                        st.session_state.result = create_text(generado_mercado)
-
-                        # Display the result
-                        st.write(st.session_state.result)
-
-                        
+                    st.session_state.container_1 = True
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
