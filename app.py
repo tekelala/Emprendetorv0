@@ -6,6 +6,8 @@ from functions import generar_desde_mercado, generar_desde_problema, generar_des
 # Initialize session state variables
 if "result" not in st.session_state:
     st.session_state.result = ""
+if "previous_answer" not in st.session_state:
+    st.session_state.previous_answer = ""
 
 # Claude functions
 def create_text(prompt):
@@ -65,8 +67,8 @@ def app():
         # Initialize session state variables if not already done
         if "result" not in st.session_state:
             st.session_state.result = ""
-        if "prompts" not in st.session_state:
-            st.session_state.prompts = ""
+        if "previous_answer" not in st.session_state:
+            st.session_state.previous_answer = ""
         
         st.markdown("Vamos a emprender en los tiempos de los LLMs")
 
@@ -88,11 +90,8 @@ def app():
                     # Call the 'send_message()' function with the 'prompts' variable
                     st.session_state.result = create_text(st.session_state.prompts)
 
-                    # Display the prompt
-                    #st.write(st.session_state.prompts)
                     # Display the result
-                    st.write(st.session_state.result)
-                    
+                    previous_answer = st.session_state.result
 
                     # Allow the user to propose changes
                     if st.session_state.result != "":
@@ -103,8 +102,12 @@ def app():
                                 with st.spinner('Applying changes...'):
                                     st.session_state.result = create_text(st.session_state.prompts)
                                 st.write(st.session_state.result)
+                                # Restore the previous answer
+                                st.session_state.result = previous_answer
 
                     st.session_state.container_1 = True
+
+
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
