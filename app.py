@@ -3,6 +3,50 @@ import requests
 import json
 from functions import generar_desde_mercado, generar_desde_problema, generar_desde_azar, generar_prop_valor_usuario, generar_propvalor, generar_modelo_negocio, generar_pitchdeck
 
+# Initialize session state variables
+if "result" not in st.session_state:
+    st.session_state.result = ""
+
+# Claude functions
+def create_text(prompt):
+    api_url = "https://api.anthropic.com/v1/complete"
+    headers = {
+        "Content-Type": "application/json",
+        "X-API-Key": st.secrets["API_KEY"]  # Use the API key from Streamlit's secrets
+    }
+
+    # Prepare the prompt for Claude
+    conversation = f"Human: {prompt}\n\nAssistant:"
+
+    # Define the body of the request
+    body = {
+        "prompt": conversation,
+        "model": "claude-2.0",
+        "temperature": 0.6,
+        "max_tokens_to_sample": 10000,
+        "stop_sequences": ["\n\nHuman:"]
+    }
+
+    # Make a POST request to the Claude API
+    try:
+        response = requests.post(api_url, headers=headers, data=json.dumps(body))
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as errh:
+        st.error(f"HTTP Error: {errh}")
+    except requests.exceptions.ConnectionError as errc:
+        st.error(f"Error Connecting: {errc}")
+    except requests.exceptions.Timeout as errt:
+        st.error(f"Timeout Error: {errt}")
+    except requests.exceptions.RequestException as err:
+        st.error(f"Something went wrong: {err}")
+    except Exception as e:
+        st.error(f"Unexpected error: {e}")
+
+    # Extract Claude's response from the JSON response
+    result = response.json()
+
+    # Return Claude's response as a string
+    return result['completion']
 
 def app():
 
@@ -17,6 +61,13 @@ def app():
         col2.image('terminator.png')  
 
     with st.container():
+        
+        # Initialize session state variables if not already done
+        if "result" not in st.session_state:
+            st.session_state.result = ""
+        if "prompts" not in st.session_state:
+            st.session_state.prompts = ""
+        
         st.markdown("Vamos a emprender en los tiempos de los LLMs")
 
         st.markdown("Tu emprendimiento/proyecto parte de:")
@@ -30,8 +81,30 @@ def app():
             mercado_proyecto = st.text_input("¿Cuál mercado?")
             if st.button('Generar Mercado', key='boton_generar_mercado'):
                 # Call your function here
-                generar_desde_mercado(mercado_proyecto)
-                st.session_state.container_1 = True
+                with st.spinner('Writting...'):
+                    # Create the 'prompts' variable
+                    st.session_state.prompts = generar_desde_mercado(mercado_proyecto)
+
+                    # Call the 'send_message()' function with the 'prompts' variable
+                    st.session_state.result = create_text(st.session_state.prompts)
+
+                    # Display the prompt
+                    #st.write(st.session_state.prompts)
+                    # Display the result
+                    st.write(st.session_state.result)
+                    
+
+                    # Allow the user to propose changes
+                    if st.session_state.result != "":
+                        user_changes = st.text_input('Propose changes to the deck:')
+                        if st.button('Apply Changes'):
+                            if user_changes:
+                                st.session_state.prompts += f" Please change the communications piece with the following instructions: {user_changes.strip()}"
+                                with st.spinner('Applying changes...'):
+                                    st.session_state.result = create_text(st.session_state.prompts)
+                                st.write(st.session_state.result)
+
+                    st.session_state.container_1 = True
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
