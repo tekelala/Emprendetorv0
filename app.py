@@ -95,14 +95,18 @@ def app():
 
                     # Allow the user to propose changes
                     if st.session_state.result != "":
-                        user_changes = st.text_input('Propón cambios a la respuesta:')
+                        user_changes = st.text_input('Propón ajustes a la respuesta:')
                         if st.button('Aplicando cambios'):
                             if user_changes:
                                 # Replace the previous result with the user's suggestion
                                 st.session_state.result = user_changes.strip()
                                 st.write(st.session_state.result)
 
-                    st.session_state.container_1 = True
+                                # Update the prompt for the next round of conversation
+                                st.session_state.prompts = st.session_state.result
+
+
+                                st.session_state.container_1 = True
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
