@@ -101,17 +101,17 @@ def app():
         else:
             st.button('Continuar', key='boton_continuar')
 
-        elif option == "No tengo aún nada definido":
-            with st.container():
-                st.markdown("Generar una idea de negocio")
-                st.button('Generar Idea de Negocio', key='boton_generar_idea_negocio')
+            elif option == "No tengo aún nada definido":
+                with st.container():
+                    st.markdown("Generar una idea de negocio")
+                    st.button('Generar Idea de Negocio', key='boton_generar_idea_negocio')
 
-                if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor_0'):
-                    # Call your function here
-                    result = create_text()
+                    if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor_0'):
+                        # Call your function here
+                        result = create_text()
 
-                    # Display the result
-                    st.write(result)
+                        # Display the result
+                        st.write(result)
 
         if 'container_1' in st.session_state and st.session_state.container_1:
             with st.container():
