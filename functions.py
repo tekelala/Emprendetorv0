@@ -59,7 +59,7 @@ def generar_propvalor(problema):
 def generar_modelo_negocio(problema, propuesta_valor):
     prompts = f'''Role: You are top entrepreneur. Analyze this value proposition {propuesta_valor} for the following market and customers {problema}. Do the following tasks and answer always in Spanish. 
     Task 1: write "Modelo de negocio:"
-    Task 2: write a business model for the value proposition you analyzed taking into account the market and customers you analyzed.
+    Task 2: write a the business model for the value proposition you analyzed taking into account the market and customers you analyzed. Use the definition of business model of Clayton Christensen for your answer.
     Task 3: write "Business Model Canvas"
     Task 4: describe the business model using each of the boxes of the business model canvas of Alexander Osterwalder. 
     Task 5: write "Modelo financiero".
@@ -71,7 +71,7 @@ def generar_modelo_negocio(problema, propuesta_valor):
     Task 9: write "Riesgos y mitigantes".
     Task 10: enumerate and describe each risk and how to manage it, that needs to be faced to develop the business.
     Task 11: write "Necesidad de inversión".
-    Task 12: estimate the investment needed and how it will be used to develop the business.'''
+    Task 12: estimate in USD the investment needed and how it will be used to develop the business.'''
 
     return prompts
 
