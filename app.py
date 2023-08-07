@@ -3,6 +3,12 @@ import requests
 import json
 from functions import generar_desde_mercado, generar_desde_problema, generar_desde_azar, generar_prop_valor_usuario, generar_propvalor, generar_modelo_negocio, generar_pitchdeck
 
+# define variables
+problema = ""
+propuesta_valor = ""
+modelo_negocio = ""
+pitch_deck = ""
+
 # Initialize session state variables
 if "result" not in st.session_state:
     st.session_state.result = ""
