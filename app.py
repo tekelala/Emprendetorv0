@@ -73,7 +73,7 @@ def create_text(prompt):
 
 def app():
 
-    st.title("Emprendetor v0")
+    st.title("Uniandes 2.023 Segundo Semestre")
 
     st.markdown("Este es un aplicativo diseñado para uso académico en la clase Emprendimiento e Innovación de la Universidad de los Andes por el profesor Camilo Serna Zamora")
 
@@ -102,7 +102,7 @@ def app():
         
         if option == "El interés de atender un mercado":
             mercado_proyecto = st.text_input("¿Cuál mercado?")
-            if st.button('Generar Mercado', key='boton_generar_mercado'):
+            if st.button('Generar desde el Mercado', key='boton_generar_mercado'):
                 # Call your function here
                 with st.spinner('Escribiendo...'):
                     # Create the answer
@@ -115,7 +115,7 @@ def app():
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
-            if st.button('Generar Problema', key='boton_generar_problema'):
+            if st.button('Generar desde un Problema', key='boton_generar_problema'):
                 # Call your function here
                 with st.spinner('Escribiendo...'):
                     # Create the answer
@@ -127,7 +127,7 @@ def app():
 
 
         elif option == "No tengo aún nada definido":
-            if st.button('Generar Azar', key='boton_generar_azar'):
+            if st.button('Generar al azar', key='boton_generar_azar'):
                 # Call your function here
                 with st.spinner('Escribiendo...'):
                     # Create the answer
@@ -153,18 +153,20 @@ def app():
                         st.session_state.propuesta_valor = create_text(generar_prop_valor_usuario(st.session_state.problema, propuesta_valor_proyecto))
 
                         # Display the result
+                        st.write(st.session_state.problema)
                         st.write(st.session_state.propuesta_valor)
                         st.session_state.container_2 = True
                         
 
             elif option_propuesta_valor == "No":
-                if st.button('Generar Propuesta de Valor sin Definir', key='boton_generar_propuesta_valor_0'):
+                if st.button('Generar Propuesta de Valor LLM', key='boton_generar_propuesta_valor_0'):
                     # Call your function here
                     with st.spinner('Escribiendo...'):
                         # Create the answer
                         st.session_state.propuesta_valor = create_text(generar_propvalor(st.session_state.problema))
 
                         # Display the result
+                        st.write(st.session_state.problema)
                         st.write(st.session_state.propuesta_valor)
                         st.session_state.container_2 = True
 
@@ -179,19 +181,24 @@ def app():
                         st.session_state.modelo_negocio = create_text(generar_modelo_negocio(st.session_state.problema, st.session_state.propuesta_valor))
 
                         # Display the result
+                        st.write(st.session_state.problema)
+                        st.write(st.session_state.propuesta_valor)
                         st.write(st.session_state.modelo_negocio)
                         st.session_state.container_3 = True
 
 
             if 'container_3' in st.session_state and st.session_state.container_3:
                 with st.container():
-                    st.markdown("Generar un pitch deck")
+                    st.markdown("Generar pitch deck")
                     if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck'):
                         with st.spinner('Escribiendo...'):
                             # Create the answer
                             st.session_state.pitch_deck = create_text(generar_pitchdeck(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio))
 
                             # Display the result
+                            st.write(st.session_state.problema)
+                            st.write(st.session_state.propuesta_valor)
+                            st.write(st.session_state.modelo_negocio)
                             st.write(st.session_state.pitch_deck)
                             st.session_state.container_4 = True
                         
