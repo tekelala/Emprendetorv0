@@ -89,8 +89,6 @@ def app():
                     # Call the 'send_message()' function with the 'prompts' variable
                     st.session_state.result = create_text(st.session_state.prompts)
 
-                    # Display the prompt
-                    #st.write(st.session_state.prompts)
                     # Display the result
                     st.write(st.session_state.result)
                     
