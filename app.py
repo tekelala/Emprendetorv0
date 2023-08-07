@@ -78,75 +78,71 @@ def app():
                                                         "El interés de atender un mercado", 
                                                         "El interés de solucionar un problema particular", 
                                                         "No tengo aún nada definido"])
-        
+
         if option == "El interés de atender un mercado":
             mercado_proyecto = st.text_input("¿Cuál mercado?")
-            if st.button('Generar Mercado', key='boton_generar_mercado'):
-                # Call your function here
-                result = create_text(mercado_proyecto)
+            with st.container():
+                st.markdown("¿Quieres generar una propuesta de valor?")
+                respuesta_propuesta_valor = st.radio("", ("Sí", "No"))
 
-                # Display the result
-                st.write(result)
+                if respuesta_propuesta_valor == "Sí":
+                    st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor')
+                else:
+                    st.button('Continuar', key='boton_continuar')
 
         elif option == "El interés de solucionar un problema particular":
             problema_proyecto = st.text_input("¿Cuál problema?")
-            if st.button('Generar Problema', key='boton_generar_problema'):
-                # Call your function here
-                result = create_text(problema_proyecto)
+            with st.container():
+                        st.markdown("¿Quieres generar una propuesta de valor?")
+        respuesta_propuesta_valor = st.radio("", ("Sí", "No"))
 
-                # Display the result
-                st.write(result)
+        if respuesta_propuesta_valor == "Sí":
+            st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor')
+        else:
+            st.button('Continuar', key='boton_continuar')
 
         elif option == "No tengo aún nada definido":
-            if st.button('Generar Azar', key='boton_generar_azar'):
-                # Call your function here
-                result = create_text()
-
-                # Display the result
-                st.write(result)
-
-        if 'container_1' in st.session_state and st.session_state.container_1:
             with st.container():
-                st.markdown("¿Tienes definida la propuesta de valor?")
-                option_propuesta_valor = st.selectbox('Selecciona una opción', ["", "Sí", "No"])
+                st.markdown("Generar una idea de negocio")
+                st.button('Generar Idea de Negocio', key='boton_generar_idea_negocio')
 
-                if option_propuesta_valor == "Sí":
-                    propuesta_valor_proyecto = st.text_input("¿Cuál es?")
-                    if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor'):
-                        # Call your function here
-                        result = create_text(propuesta_valor_proyecto)
-
-                        # Display the result
-                        st.write(result)
-
-                elif option_propuesta_valor == "No":
-                    if st.button('Generar Propuesta de Valor sin Definir', key='boton_generar_propuesta_valor_0'):
-                        # Call your function here
-                        result = create_text()
-
-                        # Display the result
-                        st.write(result)
-
-        if 'container_2' in st.session_state and st.session_state.container_2:
-            with st.container():
-                st.markdown("Generar un modelo de negocio")
-                if st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio'):
+                if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor_0'):
                     # Call your function here
                     result = create_text()
 
                     # Display the result
                     st.write(result)
 
+        if 'container_1' in st.session_state and st.session_state.container_1:
+            with st.container():
+                st.markdown("¿Tienes definida la propuesta de valor?")
+                respuesta_propuesta_valor = st.radio("", ("Sí", "No"))
+
+                if respuesta_propuesta_valor == "Sí":
+                    propuesta_valor_proyecto = st.text_input("¿Cuál es?")
+                    with st.container():
+                        st.markdown("¿Quieres generar un modelo de negocio?")
+                        respuesta_modelo_negocio = st.radio("", ("Sí", "No"))
+
+                        if respuesta_modelo_negocio == "Sí":
+                            st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio')
+                        else:
+                            st.button('Continuar', key='boton_continuar')
+
+                elif respuesta_propuesta_valor == "No":
+                    with st.container():
+                        st.markdown("Generar una propuesta de valor")
+                        st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor')
+
+        if 'container_2' in st.session_state and st.session_state.container_2:
+            with st.container():
+                st.markdown("Generar un modelo de negocio")
+                st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio')
+
             if 'container_3' in st.session_state and st.session_state.container_3:
                 with st.container():
                     st.markdown("Generar un pitch deck")
-                    if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck'):
-                        # Call your function here
-                        result = create_text()
-
-                        # Display the result
-                        st.write(result)
+                    st.button('Generar Pitch Deck', key='boton_generar_pitch_deck')
 
 if __name__ == "__main__":
     app()
-
