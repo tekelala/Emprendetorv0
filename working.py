@@ -82,7 +82,7 @@ def app():
             mercado_proyecto = st.text_input("¿Cuál mercado?")
             if st.button('Generar Mercado', key='boton_generar_mercado'):
                 # Call your function here
-                with st.spinner('Writting...'):
+                with st.spinner('Escribiendo...'):
                     # Create the 'prompts' variable
                     st.session_state.prompts = generar_desde_mercado(mercado_proyecto)
 
@@ -91,17 +91,6 @@ def app():
 
                     # Display the result
                     st.write(st.session_state.result)
-                    
-
-                    # Allow the user to propose changes
-                    if st.session_state.result != "":
-                        user_changes = st.text_input('Propón ajustes a la respuesta:')
-                        if st.button('Apply Changes'):
-                            if user_changes:
-                                st.session_state.prompts += f" Please change the text of the answer with the following instructions: {user_changes.strip()}"
-                                with st.spinner('Aplicando...'):
-                                    st.session_state.result = create_text(st.session_state.prompts)
-                                st.write(st.session_state.result)
 
                     st.session_state.container_1 = True
 

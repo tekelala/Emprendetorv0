@@ -89,7 +89,7 @@ def app():
                     # Call the 'send_message()' function with the 'prompts' variable
                     st.session_state.result = create_text(st.session_state.prompts)
 
-                    texto_mercado = st.session_state.result
+                    problema = st.session_state.result
 
                     # Display the result
                     st.write(st.session_state.result)
@@ -107,7 +107,7 @@ def app():
                     # Call the 'send_message()' function with the 'prompts' variable
                     st.session_state.result = create_text(st.session_state.prompts)
 
-                    texto_problema = st.session_state.result
+                    problema = st.session_state.result
 
                     # Display the result
                     st.write(st.session_state.result)
@@ -124,7 +124,7 @@ def app():
                     # Call the 'send_message()' function with the 'prompts' variable
                     st.session_state.result = create_text(st.session_state.prompts)
 
-                    azar_problema = st.session_state.result
+                    problema = st.session_state.result
 
                     # Display the result
                     st.write(st.session_state.result)
@@ -140,29 +140,72 @@ def app():
                 propuesta_valor_proyecto = st.text_input("¿Cuál es?")
                 if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor'):
                     # Call your function here
-                    generar_prop_valor_usuario(propuesta_valor_proyecto)
-                    st.session_state.container_2 = True
+                    with st.spinner('Escribiendo...'):
+                        # Create the 'prompts' variable
+                        st.session_state.prompts = generar_prop_valor_usuario(problema, propuesta_valor_proyecto)
+
+                        # Call the 'send_message()' function with the 'prompts' variable
+                        st.session_state.result = create_text(st.session_state.prompts)
+
+                        propuesta_valor = st.session_state.result
+
+                        # Display the result
+                        st.write(st.session_state.result)
+                        
+                        st.session_state.container_2 = True
 
             elif option_propuesta_valor == "No":
                 if st.button('Generar Propuesta de Valor sin Definir', key='boton_generar_propuesta_valor_0'):
                     # Call your function here
-                    generar_propvalor()
-                    st.session_state.container_2 = True
+                    with st.spinner('Escribiendo...'):
+                        # Create the 'prompts' variable
+                        st.session_state.prompts =  generar_propvalor(problema)
+
+                        # Call the 'send_message()' function with the 'prompts' variable
+                        st.session_state.result = create_text(st.session_state.prompts)
+
+                        propuesta_valor = st.session_state.result
+
+                        # Display the result
+                        st.write(st.session_state.result)
+                        
+                        st.session_state.container_2 = True
+                   
 
         if 'container_2' in st.session_state and st.session_state.container_2:
             with st.container():
                 st.markdown("Generar un modelo de negocio")
                 if st.button('Generar Modelo de Negocio', key='boton_generar_modelo_negocio'):
-                    # Call your function here
-                    generar_modelo_negocio()
-                    st.session_state.container_3 = True
+                    with st.spinner('Escribiendo...'):
+                        # Create the 'prompts' variable
+                        st.session_state.prompts =  generar_modelo_negocio(problema, propuesta_valor)
+
+                        # Call the 'send_message()' function with the 'prompts' variable
+                        st.session_state.result = create_text(st.session_state.prompts)
+
+                        modelo_negocio = st.session_state.result
+
+                        # Display the result
+                        st.write(st.session_state.result)
+
+                        st.session_state.container_3 = True
 
             if 'container_3' in st.session_state and st.session_state.container_3:
                 with st.container():
                     st.markdown("Generar un pitch deck")
                     if st.button('Generar Pitch Deck', key='boton_generar_pitch_deck'):
-                        # Call your function here
-                        generar_pitchdeck()
+                        # Create the 'prompts' variable
+                        st.session_state.prompts =  generar_pitchdeck(problema, propuesta_valor, modelo_negocio)
+
+                        # Call the 'send_message()' function with the 'prompts' variable
+                        st.session_state.result = create_text(st.session_state.prompts)
+
+                        pitch_deck = st.session_state.result
+
+                        # Display the result
+                        st.write(st.session_state.result)
+                        
+                        st.session_state.container_4 = True
         
 if __name__ == "__main__":
     app()
