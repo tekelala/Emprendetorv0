@@ -115,11 +115,13 @@ def app():
                 generar_desde_problema(problema_proyecto)
                 st.session_state.container_1 = True
 
-        elif option == "No tengo aún nada definido":
-            if st.button('Generar Azar', key='boton_generar_azar'):
-                # Call your function here
-                generar_desde_azar(azar_proyecto)
-                st.session_state.container_1 = True
+        if option == "No tengo aún nada definido":
+            with st.container():
+                st.markdown("Generar Azar")
+                if st.button('Generar Azar', key='boton_generar_azar'):
+                    # Call your function here
+                    generar_desde_azar(azar_proyecto)
+                    st.session_state.container_1 = True
 
     if 'container_1' in st.session_state and st.session_state.container_1:
         with st.container():
