@@ -25,7 +25,7 @@ def generar_desde_problema(problema_proyecto):
     return prompts
 
 def generar_desde_azar():
-    prompts = f'''Role: You are top entrepreneur. Randomly select a market and do the following tasks. Answer always in Spanish. 
+    prompts = f'''Role: You are top entrepreneur. Select a market being highly creative and do the following tasks. Answer always in Spanish. 
     Task 1: write "Mercado:"
     Task 2: describe the market you randomly selected.
     Task 3: write "Problema"
@@ -40,17 +40,17 @@ def generar_prop_valor_usuario(problema, propuesta_valor_proyecto):
     Task 1: write "Propuesta de Valor:"
     Task 2: write the results of your analysis of the value proposition and propose and improved value proposition that solves the the problems and jobs to be done.
     Task 3: write "Atributos de la propuesta de valor"
-    Task 4: describe the atributes of the value proposition in the previous task. 
+    Task 4: describe the atributes of the value proposition in the task 2. 
     Task 5: if there is a different value proposition for each customer segment enumerate and describe them.'''
 
     return prompts
 
 def generar_propvalor(problema):
-    prompts = f'''Role: You are top entrepreneur. Analyze this value proposition {propuesta_valor_proyecto} for the following market and customers {problema}. Do the following tasks and answer always in Spanish. 
+    prompts = f'''Role: You are top entrepreneur. Analize the following market and customers {problema}. Do the following tasks and answer always in Spanish. 
     Task 1: write "Propuesta de Valor:"
-    Task 2: write the results of your analysis of the value proposition and propose and improved value proposition that solves the the problems and jobs to be done.
+    Task 2: write the results of your analysis of the value proposition and propose and a value proposition that solves the the problems and jobs to be done.
     Task 3: write "Atributos de la propuesta de valor"
-    Task 4: describe the atributes of the value proposition in the previous task. 
+    Task 4: describe the atributes of the value proposition in the task 2 task. 
     Task 5: if there is a different value proposition for each customer segment enumerate and describe them.'''
 
     return prompts
