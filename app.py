@@ -9,15 +9,13 @@ def write_answers_to_txt():
     file_name = 'answers.txt'
     with open(file_name, 'w') as f:
         # Write each answer to the file
-        f.write('Problema:\n')
+        f.write('Contexto:\n')
         f.write(st.session_state.problema)
         f.write('\n\n')
 
-        f.write('Propuesta de Valor:\n')
         f.write(st.session_state.propuesta_valor)
         f.write('\n\n')
 
-        f.write('Modelo de Negocio:\n')
         f.write(st.session_state.modelo_negocio)
         f.write('\n\n')
 
