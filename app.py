@@ -1,8 +1,6 @@
 import streamlit as st
 import requests
 import json
-from docx import Document
-import os
 from functions import generar_desde_mercado, generar_desde_problema, generar_desde_azar, generar_prop_valor_usuario, generar_propvalor, generar_modelo_negocio, generar_pitchdeck
 
 # define variables
@@ -11,24 +9,25 @@ propuesta_valor = ""
 modelo_negocio = ""
 pitch_deck = ""
 
-def write_answers_to_doc(problema, propuesta_valor, modelo_negocio, pitch_deck):
-    doc = Document()
+    # Open the file in write mode
+    with open('answers.txt', 'w') as f:
+        # Write each answer to the file
+        f.write('Problema:\n')
+        f.write(problema)
+        f.write('\n\n')
 
-    # Add each answer to the document
-    doc.add_heading('Problema', level=1)
-    doc.add_paragraph(problema)
+        f.write('Propuesta de Valor:\n')
+        f.write(propuesta_valor)
+        f.write('\n\n')
 
-    doc.add_heading('Propuesta de Valor', level=1)
-    doc.add_paragraph(propuesta_valor)
+        f.write('Modelo de Negocio:\n')
+        f.write(modelo_negocio)
+        f.write('\n\n')
 
-    doc.add_heading('Modelo de Negocio', level=1)
-    doc.add_paragraph(modelo_negocio)
+        f.write('Pitch Deck:\n')
+        f.write(pitch_deck)
+        f.write('\n')
 
-    doc.add_heading('Pitch Deck', level=1)
-    doc.add_paragraph(pitch_deck)
-
-    # Save the document to a temporary location
-    doc.save('/tmp/answers.docx')
 
 # Claude functions
 def create_text(prompt):
@@ -195,13 +194,14 @@ def app():
                             # Display the result
                             st.write(st.session_state.pitch_deck)
                         
-if st.button('Descargar negocio'):
+# At the end of your app() function, add a button for downloading the .txt file
+    if st.button('Descargar negocio'):
         with st.spinner('Preparando...'):
-            # Call the function to write the answers to a .doc file
-            write_answers_to_doc(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio, st.session_state.pitch_deck)
+            # Call the function to write the answers to a .txt file
+            write_answers_to_txt(st.session_state.problema, st.session_state.propuesta_valor, st.session_state.modelo_negocio, st.session_state.pitch_deck)
 
             # Provide a download link
-            st.markdown('<a href="/tmp/answers.docx" download="answers.docx">Click here to download the .doc file</a>', unsafe_allow_html=True)         
+            st.markdown('<a href="answers.txt" download="answers.txt">Click here to download the .txt file</a>', unsafe_allow_html=True)  
 
         
 if __name__ == "__main__":
