@@ -106,26 +106,26 @@ def app():
                 st.write(result)
 
         if 'container_1' in st.session_state and st.session_state.container_1:
-        with st.container():
-            st.markdown("¿Tienes definida la propuesta de valor?")
-            option_propuesta_valor = st.selectbox('Selecciona una opción', ["", "Sí", "No"])
+            with st.container():
+                st.markdown("¿Tienes definida la propuesta de valor?")
+                option_propuesta_valor = st.selectbox('Selecciona una opción', ["", "Sí", "No"])
 
-            if option_propuesta_valor == "Sí":
-                propuesta_valor_proyecto = st.text_input("¿Cuál es?")
-                if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor'):
-                    # Call your function here
-                    result = create_text(propuesta_valor_proyecto)
+                if option_propuesta_valor == "Sí":
+                    propuesta_valor_proyecto = st.text_input("¿Cuál es?")
+                    if st.button('Generar Propuesta de Valor', key='boton_generar_propuesta_valor'):
+                        # Call your function here
+                        result = create_text(propuesta_valor_proyecto)
 
-                    # Display the result
-                    st.write(result)
+                        # Display the result
+                        st.write(result)
 
-            elif option_propuesta_valor == "No":
-                if st.button('Generar Propuesta de Valor sin Definir', key='boton_generar_propuesta_valor_0'):
-                    # Call your function here
-                    result = create_text()
+                elif option_propuesta_valor == "No":
+                    if st.button('Generar Propuesta de Valor sin Definir', key='boton_generar_propuesta_valor_0'):
+                        # Call your function here
+                        result = create_text()
 
-                    # Display the result
-                    st.write(result)
+                        # Display the result
+                        st.write(result)
 
         if 'container_2' in st.session_state and st.session_state.container_2:
             with st.container():
