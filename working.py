@@ -8,7 +8,7 @@ if "result" not in st.session_state:
     st.session_state.result = ""
 
 # Claude functions
-def create_text(prompt):
+def create_text(prompt, user_changes):
     api_url = "https://api.anthropic.com/v1/complete"
     headers = {
         "Content-Type": "application/json",
@@ -17,13 +17,15 @@ def create_text(prompt):
 
     # Prepare the prompt for Claude
     conversation = f"Human: {prompt}\n\nAssistant:"
+    if user_changes:
+        conversation += f" Please change the communications piece with the following instructions: {user_changes.strip()}"
 
     # Define the body of the request
     body = {
         "prompt": conversation,
         "model": "claude-2.0",
         "temperature": 0.6,
-        "max_tokens_to_sample": 10000,
+        "max_tokens_to_sample": 100000,
         "stop_sequences": ["\n\nHuman:"]
     }
 
@@ -96,11 +98,11 @@ def app():
 
                     # Allow the user to propose changes
                     if st.session_state.result != "":
-                        user_changes = st.text_input('Propose changes to the deck:')
+                        user_changes = st.text_input('Propón ajustes a la respuesta:')
                         if st.button('Apply Changes'):
                             if user_changes:
-                                st.session_state.prompts += f" Please change the communications piece with the following instructions: {user_changes.strip()}"
-                                with st.spinner('Applying changes...'):
+                                st.session_state.prompts += f" Please change the text of the answer with the following instructions: {user_changes.strip()}"
+                                with st.spinner('Aplicando cambios...'):
                                     st.session_state.result = create_text(st.session_state.prompts)
                                 st.write(st.session_state.result)
 
