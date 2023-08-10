@@ -64,14 +64,16 @@ def generar_modelo_negocio(problema, propuesta_valor):
     Task 4: describe the business model using each of the boxes of the business model canvas of Alexander Osterwalder. 
     Task 5: write "Modelo financiero".
     Task 6: describe the financial model for the business model you described before.
-    Task 5: write "Go to market".
-    Task 6: describe a got to market strategy for the business model you described before.
-    Task 7: write "Equipo".
-    Task 8: enumerate and describe each team member role to succesfully develop the business model.
-    Task 9: write "Riesgos y mitigantes".
-    Task 10: enumerate and describe each risk and how to manage it, that needs to be faced to develop the business.
-    Task 11: write "Necesidad de inversión".
-    Task 12: estimate in COP the investment needed and how it will be used to develop the business.'''
+    Task 7: write "Slogan/bumper sticker".
+    Task 8: create a catchy and professional slogan for the business.
+    Task 9: write "Go to market".
+    Task 10: describe a got to market strategy for the business model you described before.
+    Task 11: write "Equipo".
+    Task 12: enumerate and describe each team member role to succesfully develop the business model.
+    Task 13: write "Riesgos y mitigantes".
+    Task 14: enumerate and describe each risk and how to manage it, that needs to be faced to develop the business.
+    Task 15: write "Necesidad de inversión".
+    Task 16: estimate in COP the investment needed and how it will be used to develop the business.'''
 
     return prompts
 
