@@ -48,7 +48,7 @@ def create_text(prompt):
     # Define the body of the request
     body = {
         "prompt": conversation,
-        "model": "claude-2.0",
+        "model": "claude-2.1",
         "max_tokens_to_sample": 100000,
         "temperature": 0.6,
         "stop_sequences": ["\n\nHuman:"]
@@ -78,7 +78,7 @@ def create_text(prompt):
 
 def app():
 
-    st.title("Uniandes 2.023 Segundo Semestre")
+    st.title("Uniandes 2.024 Primer Semestre")
 
     st.markdown("Este es un aplicativo diseñado para uso académico en la clase Emprendimiento e Innovación de la Universidad de los Andes por el profesor Camilo Serna Zamora")
 
